@@ -23,6 +23,26 @@ object Libs {
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
 
+    object Retrofit {
+        private const val version = "2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$version"
+        object Adapter {
+            private const val version = "0.9.2"
+            const val coroutinesAdapter =
+                "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${version}"
+        }
+    }
+
+    object Moshi {
+        private const val version = "1.9.3"
+        const val moshi = "com.squareup.moshi:moshi:${version}"
+        const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${version}"
+        object Converter {
+            private const val version = "2.9.0"
+            const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${version}"
+        }
+    }
+
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta03"
 
@@ -40,7 +60,6 @@ object Libs {
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
-
         }
 
         object ComposeNavigation {

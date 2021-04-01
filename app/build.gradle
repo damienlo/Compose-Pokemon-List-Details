@@ -3,6 +3,7 @@ import jet.pack.compose.masterdetails.buildsrc.Libs
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -48,16 +49,20 @@ android {
 }
 
 dependencies {
+    // Kotlin
     implementation Libs.Kotlin.stdlib
+
+    // Coroutines
+    implementation Libs.Coroutines.core
     implementation Libs.Coroutines.android
 
-    implementation Libs.Coroutines.core
-
+    // AndroidX
     implementation Libs.AndroidX.coreKtx
     implementation Libs.AndroidX.Activity.activityCompose
     implementation Libs.AndroidX.Lifecycle.viewModelCompose
     implementation Libs.AndroidX.ConstraintLayout.constraintLayoutCompose
 
+    // Compose
     implementation Libs.AndroidX.Compose.runtime
     implementation Libs.AndroidX.Compose.runtimeLiveData
     implementation Libs.AndroidX.Compose.foundation
@@ -68,9 +73,19 @@ dependencies {
     implementation Libs.AndroidX.Compose.animation
     implementation Libs.AndroidX.Compose.iconsExtended
     implementation Libs.AndroidX.Compose.tooling
+    implementation Libs.AndroidX.ComposeNavigation.navigation
 
+    // Accompanist
     implementation Libs.Accompanist.coil
     implementation Libs.Accompanist.insets
 
-    implementation Libs.AndroidX.ComposeNavigation.navigation
+    // Retrofit
+    implementation Libs.Retrofit.retrofit
+    implementation Libs.Retrofit.Adapter.coroutinesAdapter
+
+    // Moshi
+    implementation Libs.Moshi.moshi
+    implementation Libs.Moshi.Converter.moshiConverter
+    kapt Libs.Moshi.moshiCodeGen
+
 }
