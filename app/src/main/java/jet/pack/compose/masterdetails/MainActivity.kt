@@ -8,7 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
-import jet.pack.compose.masterdetails.ui.home.HomeScreen
+import jet.pack.compose.masterdetails.ui.screens.home.HomeScreen
 import jet.pack.compose.masterdetails.ui.theme.MasterDetailsTheme
 
 class MainActivity : ComponentActivity() {
