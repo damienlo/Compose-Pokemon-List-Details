@@ -9,7 +9,7 @@ import jet.pack.compose.masterdetails.data.remote.PokemonService
 class PokemonRepository(private val service: PokemonService) {
 
     suspend fun getPokemons(): List<PokemonNamedApiResourceResponse> {
-        val response = service.getPokemons(limit = 25, offset = 0)
+        val response = service.getPokemons(limit = 151, offset = 0)
         return response.results
     }
 
