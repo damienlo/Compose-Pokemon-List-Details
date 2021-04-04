@@ -6,19 +6,19 @@ import jet.pack.compose.masterdetails.ui.screens.common.GenericScreenError
 import jet.pack.compose.masterdetails.ui.screens.common.GenericScreenLoading
 
 @Composable
-fun ListScreen(
-    viewModel: ListViewModel,
+fun PokemonListScreen(
+    viewModel: PokemonListViewModel,
     showDetails: (String) -> Unit
 ) {
     val screenState = viewModel.state
     Crossfade(targetState = screenState) {
         when (screenState) {
-            is ListState.Loading -> GenericScreenLoading()
-            is ListState.Success -> ListSuccessScreen(
+            is PokemonListState.Loading -> GenericScreenLoading()
+            is PokemonListState.Success -> ListSuccessScreen(
                 pokemons = screenState.pokemons,
                 showDetails = showDetails
             )
-            is ListState.Error -> GenericScreenError(retryButtonClicked = { viewModel.retry() })
+            is PokemonListState.Error -> GenericScreenError(retryButtonClicked = { viewModel.retry() })
         }
     }
 }

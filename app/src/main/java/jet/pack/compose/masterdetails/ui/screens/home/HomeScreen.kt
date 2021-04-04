@@ -10,10 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
-import jet.pack.compose.masterdetails.ui.screens.details.DetailsScreen
-import jet.pack.compose.masterdetails.ui.screens.details.DetailsViewModel
-import jet.pack.compose.masterdetails.ui.screens.list.ListScreen
-import jet.pack.compose.masterdetails.ui.screens.list.ListViewModel
+import jet.pack.compose.masterdetails.ui.screens.details.PokemonDetailsScreen
+import jet.pack.compose.masterdetails.ui.screens.details.PokemonDetailsViewModel
+import jet.pack.compose.masterdetails.ui.screens.list.PokemonListScreen
+import jet.pack.compose.masterdetails.ui.screens.list.PokemonListViewModel
 
 private object Routes {
     const val List = "list"
@@ -33,17 +33,17 @@ fun HomeScreen(startDestination: String = Routes.List) {
 
     NavHost(navController, startDestination = startDestination) {
         composable(Routes.List) {
-            val listViewModel: ListViewModel = navController.hiltNavGraphViewModel(Routes.List)
-            ListScreen(viewModel = listViewModel, showDetails = actions.showDetails)
+            val listViewModel: PokemonListViewModel = navController.hiltNavGraphViewModel(Routes.List)
+            PokemonListScreen(viewModel = listViewModel, showDetails = actions.showDetails)
         }
         composable(
             Routes.Details + "/{itemId}",
             arguments = listOf(navArgument("itemId") { type = NavType.StringType })
         ) { backStackEntry ->
             val itemId = backStackEntry.arguments!!.getString("itemId")!!
-            val detailsViewModel: DetailsViewModel =
+            val detailsViewModel: PokemonDetailsViewModel =
                 navController.hiltNavGraphViewModel(Routes.Details + "/{itemId}")
-            DetailsScreen(viewModel = detailsViewModel.also { it.init(itemId) })
+            PokemonDetailsScreen(viewModel = detailsViewModel.also { it.init(itemId) })
         }
     }
 }

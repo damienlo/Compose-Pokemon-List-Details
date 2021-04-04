@@ -11,26 +11,26 @@ import jet.pack.compose.masterdetails.ui.model.mapper.PokemonDetailsUiMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class DetailsState {
-    object Loading : DetailsState()
-    data class Success(val pokemon: PokemonDetailsUiModel) : DetailsState()
-    data class Error(val cause: Exception) : DetailsState()
+sealed class PokemonDetailsState {
+    object Loading : PokemonDetailsState()
+    data class Success(val pokemon: PokemonDetailsUiModel) : PokemonDetailsState()
+    data class Error(val cause: Exception) : PokemonDetailsState()
 }
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(
+class PokemonDetailsViewModel @Inject constructor(
     private val repository: IPokemonRepository,
     private val uiMapper: PokemonDetailsUiMapper
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<DetailsState>(DetailsState.Loading)
-    val state: DetailsState by _state
+    private val _state = mutableStateOf<PokemonDetailsState>(PokemonDetailsState.Loading)
+    val state: PokemonDetailsState by _state
 
     private lateinit var pokemonId: String
     // TODO Look into AssistedInject & navigation-compose
     fun init(id: String) {
         pokemonId = id
-        if (state !is DetailsState.Success) {
+        if (state !is PokemonDetailsState.Success) {
             fetchPokemon(pokemonId = pokemonId)
         }
     }
@@ -40,14 +40,14 @@ class DetailsViewModel @Inject constructor(
     }
 
     private fun fetchPokemon(pokemonId: String) {
-        _state.value = DetailsState.Loading
+        _state.value = PokemonDetailsState.Loading
         viewModelScope.launch {
             try {
                 val pokemon = repository.getPokemon(pokemonId = pokemonId)
                 val pokemonUiItem = uiMapper.map(pokemon)
-                _state.value = DetailsState.Success(pokemon = pokemonUiItem)
+                _state.value = PokemonDetailsState.Success(pokemon = pokemonUiItem)
             } catch (e: Exception) {
-                _state.value = DetailsState.Error(cause = e)
+                _state.value = PokemonDetailsState.Error(cause = e)
             }
         }
     }

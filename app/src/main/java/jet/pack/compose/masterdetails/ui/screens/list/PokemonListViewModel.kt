@@ -11,20 +11,20 @@ import jet.pack.compose.masterdetails.ui.model.mapper.PokemonPreviewUiMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class ListState {
-    object Loading : ListState()
-    data class Success(val pokemons: List<PokemonPreviewUiModel>) : ListState()
-    data class Error(val cause: Exception) : ListState()
+sealed class PokemonListState {
+    object Loading : PokemonListState()
+    data class Success(val pokemons: List<PokemonPreviewUiModel>) : PokemonListState()
+    data class Error(val cause: Exception) : PokemonListState()
 }
 
 @HiltViewModel
-class ListViewModel @Inject constructor(
+class PokemonListViewModel @Inject constructor(
     private val repository: IPokemonRepository,
     private val uiMapper: PokemonPreviewUiMapper
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<ListState>(ListState.Loading)
-    val state: ListState by _state
+    private val _state = mutableStateOf<PokemonListState>(PokemonListState.Loading)
+    val state: PokemonListState by _state
 
     init {
         fetchPokemons()
@@ -35,14 +35,14 @@ class ListViewModel @Inject constructor(
     }
 
     private fun fetchPokemons() {
-        _state.value = ListState.Loading
+        _state.value = PokemonListState.Loading
         viewModelScope.launch {
             try {
                 val pokemons = repository.getPokemons()
                 val pokemonUiItems = pokemons.map { uiMapper.map(it) }
-                _state.value = ListState.Success(pokemons = pokemonUiItems)
+                _state.value = PokemonListState.Success(pokemons = pokemonUiItems)
             } catch (e: Exception) {
-                _state.value = ListState.Error(cause = e)
+                _state.value = PokemonListState.Error(cause = e)
             }
         }
     }
