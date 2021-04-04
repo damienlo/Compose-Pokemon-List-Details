@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,17 +14,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetState
-import androidx.compose.material.BottomSheetValue
+import androidx.compose.material.BackdropScaffold
+import androidx.compose.material.BackdropValue
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.rememberBackdropScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -45,23 +52,49 @@ import jet.pack.compose.masterdetails.ui.theme.MasterDetailsTheme
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
 internal fun DetailsScreenSuccess(pokemon: PokemonDetailsUiModel) {
-    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed)
-    )
-    BottomSheetScaffold(
-        scaffoldState = bottomSheetScaffoldState,
-        sheetContent = {
+    val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed)
+    LaunchedEffect(scaffoldState) {
+        scaffoldState.reveal()
+    }
+    BackdropScaffold(
+        scaffoldState = scaffoldState,
+        appBar = {
+            DetailsScreenTopBar(pokemon = pokemon)
+        },
+        backLayerContent = {
+            DetailsScreenBackGround(pokemon = pokemon)
+        },
+        frontLayerScrimColor = Color.Transparent,
+        frontLayerContent = {
             DetailsScreenBody(pokemon = pokemon)
-        },
-        sheetPeekHeight = percentScreenHeight(.66f),
-        content = {
-            DetailsScreenBackGround(pokemon)
-        },
+        }
     )
 }
 
 @Composable
-fun DetailsScreenBackGround(pokemon: PokemonDetailsUiModel) {
+fun DetailsScreenTopBar(pokemon: PokemonDetailsUiModel) {
+    TopAppBar(
+        title = {
+            Text(
+                text = pokemon.name,
+                style = MaterialTheme.typography.h4,
+                color = MaterialTheme.colors.onPrimary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { /* */ }) {
+                Icon(Icons.Default.ArrowBack, contentDescription = "back arrow")
+            }
+        },
+        elevation = 0.dp,
+        backgroundColor = Color.Transparent
+    )
+}
+
+@Composable
+private fun DetailsScreenBackGround(pokemon: PokemonDetailsUiModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -76,21 +109,21 @@ fun DetailsScreenBackGround(pokemon: PokemonDetailsUiModel) {
             Text(
                 text = "# %03d".format(pokemon.id.toInt()),
                 style = MaterialTheme.typography.h5,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colors.onPrimary
             )
             Spacer(modifier = Modifier.height(8.dp))
             val height = "%.1f".format(pokemon.height / 10f)
             Text(
                 text = stringResource(R.string.pokemon_details_height, height),
                 style = MaterialTheme.typography.subtitle2,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colors.onPrimary
             )
             Spacer(modifier = Modifier.height(4.dp))
             val weight = "%.1f".format(pokemon.weight / 10f)
             Text(
                 text = stringResource(R.string.pokemon_details_weight, weight),
                 style = MaterialTheme.typography.subtitle2,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colors.onPrimary
             )
         }
         PokemonImage(
@@ -103,23 +136,15 @@ fun DetailsScreenBackGround(pokemon: PokemonDetailsUiModel) {
 }
 
 @Composable
-fun DetailsScreenBody(pokemon: PokemonDetailsUiModel) {
+private fun DetailsScreenBody(pokemon: PokemonDetailsUiModel) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(MaterialTheme.colors.surface)
             .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
-        // Title
-        Text(
-            text = pokemon.name,
-            style = MaterialTheme.typography.h4,
-            color = MaterialTheme.colors.onSurface,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
         // Types
         Spacer(modifier = Modifier.height(16.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -157,7 +182,7 @@ fun DetailsScreenBody(pokemon: PokemonDetailsUiModel) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Column {
-            pokemon.moves.forEachIndexed { index, move  ->
+            pokemon.moves.forEachIndexed { index, move ->
                 PokemonMoveRow(move)
                 if (index < pokemon.moves.lastIndex) {
                     Divider(thickness = 1.dp)
