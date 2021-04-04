@@ -20,6 +20,7 @@ class PokemonMapper {
         id = pokemonDataModel.id.toString(),
         name = pokemonDataModel.name,
         description = species.flavorTextEntries.getDescription(),
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonDataModel.id.toString()}.png",
         mainColor = getMainColor(species),
         height = pokemonDataModel.height,
         weight = pokemonDataModel.weight,
