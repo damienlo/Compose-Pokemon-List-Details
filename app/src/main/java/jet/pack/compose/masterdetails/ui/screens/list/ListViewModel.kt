@@ -1,19 +1,15 @@
 package jet.pack.compose.masterdetails.ui.screens.list
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.compose.runtime.getValue
-import jet.pack.compose.masterdetails.data.remote.PokemonRemoteDataSource
-import jet.pack.compose.masterdetails.data.repository.PokemonRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import jet.pack.compose.masterdetails.domain.GetPokemonPreviewsInteractor
-import jet.pack.compose.masterdetails.domain.model.mapper.PokemonPreviewMapper
 import jet.pack.compose.masterdetails.ui.model.PokemonPreviewUiModel
 import jet.pack.compose.masterdetails.ui.model.mapper.PokemonPreviewUiMapper
 import kotlinx.coroutines.launch
-import java.lang.Exception
-
+import javax.inject.Inject
 
 sealed class ListState {
     object Loading : ListState()
@@ -21,7 +17,8 @@ sealed class ListState {
     data class Error(val cause: Exception) : ListState()
 }
 
-class ListViewModel(
+@HiltViewModel
+class ListViewModel @Inject constructor(
     private val getPokemonPreviews: GetPokemonPreviewsInteractor,
     private val uiMapper: PokemonPreviewUiMapper
 ) : ViewModel() {
@@ -47,25 +44,6 @@ class ListViewModel(
             } catch (e: Exception) {
                 _state.value = ListState.Error(cause = e)
             }
-        }
-    }
-}
-
-class ListViewModelFactory : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return when {
-            modelClass.isAssignableFrom(ListViewModel::class.java) -> {
-                val pokemonRepository = PokemonRepository(PokemonRemoteDataSource.pokemonService)
-                ListViewModel(
-                    getPokemonPreviews = GetPokemonPreviewsInteractor(
-                        repository = pokemonRepository,
-                        mapper = PokemonPreviewMapper()
-                    ),
-                    uiMapper = PokemonPreviewUiMapper()
-                ) as T
-            }
-            else -> throw IllegalArgumentException("Unknown ViewModel $modelClass")
         }
     }
 }

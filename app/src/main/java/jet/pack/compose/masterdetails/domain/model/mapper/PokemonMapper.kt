@@ -9,8 +9,9 @@ import jet.pack.compose.masterdetails.domain.model.Move
 import jet.pack.compose.masterdetails.domain.model.Pokemon
 import jet.pack.compose.masterdetails.domain.model.PokemonType
 import jet.pack.compose.masterdetails.domain.model.Stat
+import javax.inject.Inject
 
-class PokemonMapper {
+class PokemonMapper @Inject constructor() {
 
     fun map(
         pokemonDataModel: PokemonDetailsResponse,

@@ -43,6 +43,22 @@ object Libs {
         }
     }
 
+    object Dagger {
+        private const val version = "2.33-beta"
+        const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${version}"
+        const val hiltAndroid = "com.google.dagger:hilt-android:${version}"
+        const val hiltAndroidTesting = "com.google.dagger:hilt-android-testing:${version}"
+        const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${version}"
+        object AndroidX {
+            private const val version = "1.0.0-alpha03"
+            const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${version}"
+        }
+        object Navigation {
+            private const val version = "1.0.0-alpha01"
+            const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:${version}"
+        }
+    }
+
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta03"
 

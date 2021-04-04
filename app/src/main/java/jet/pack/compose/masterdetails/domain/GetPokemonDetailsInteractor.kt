@@ -4,15 +4,16 @@ import jet.pack.compose.masterdetails.data.model.PokemonDetailsResponse
 import jet.pack.compose.masterdetails.data.model.PokemonMoveResponse
 import jet.pack.compose.masterdetails.data.model.PokemonSpeciesResponse
 import jet.pack.compose.masterdetails.data.repository.PokemonRepository
-import jet.pack.compose.masterdetails.domain.model.mapper.PokemonIdExtractorUtils.extractId
 import jet.pack.compose.masterdetails.domain.model.Pokemon
+import jet.pack.compose.masterdetails.domain.model.mapper.PokemonIdExtractorUtils.extractId
 import jet.pack.compose.masterdetails.domain.model.mapper.PokemonMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class GetPokemonDetailsInteractor(
+class GetPokemonDetailsInteractor @Inject constructor(
     private val repository: PokemonRepository,
     private val mapper: PokemonMapper
 ) {

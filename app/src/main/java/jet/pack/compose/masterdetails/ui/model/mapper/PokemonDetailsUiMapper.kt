@@ -3,8 +3,9 @@ package jet.pack.compose.masterdetails.ui.model.mapper
 import jet.pack.compose.masterdetails.domain.model.Pokemon
 import jet.pack.compose.masterdetails.ui.model.PokemonDetailsUiModel
 import java.util.*
+import javax.inject.Inject
 
-class PokemonDetailsUiMapper(
+class PokemonDetailsUiMapper @Inject constructor(
     private val typeUiMapper: PokemonTypeUiMapper,
     private val statUiMapper: PokemonStatUiMapper,
     private val moveUiMapper: PokemonMoveUiMapper

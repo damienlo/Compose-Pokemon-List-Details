@@ -3,8 +3,9 @@ package jet.pack.compose.masterdetails.ui.model.mapper
 import jet.pack.compose.masterdetails.R
 import jet.pack.compose.masterdetails.domain.model.Stat
 import jet.pack.compose.masterdetails.ui.model.PokemonStatUiModel
+import javax.inject.Inject
 
-class PokemonStatUiMapper {
+class PokemonStatUiMapper @Inject constructor() {
 
     fun map(stat: Stat): PokemonStatUiModel = PokemonStatUiModel(
         nameResId = stat.name.toStatResId(),

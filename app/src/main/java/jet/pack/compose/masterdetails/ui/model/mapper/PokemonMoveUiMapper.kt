@@ -3,8 +3,11 @@ package jet.pack.compose.masterdetails.ui.model.mapper
 import jet.pack.compose.masterdetails.domain.model.Move
 import jet.pack.compose.masterdetails.ui.model.PokemonMoveUiModel
 import java.util.*
+import javax.inject.Inject
 
-class PokemonMoveUiMapper(private val typeUiMapper: PokemonTypeUiMapper) {
+class PokemonMoveUiMapper @Inject constructor(
+    private val typeUiMapper: PokemonTypeUiMapper
+) {
 
     fun map(move: Move): PokemonMoveUiModel = PokemonMoveUiModel(
         name = move.name.capitalize(Locale.getDefault()),

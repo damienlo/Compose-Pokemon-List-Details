@@ -2,8 +2,9 @@ package jet.pack.compose.masterdetails.ui.model.mapper
 
 import jet.pack.compose.masterdetails.domain.model.PokemonType
 import jet.pack.compose.masterdetails.ui.model.PokemonTypeUiModel
+import javax.inject.Inject
 
-class PokemonTypeUiMapper {
+class PokemonTypeUiMapper @Inject constructor() {
 
     fun map(type: PokemonType): PokemonTypeUiModel = when (type) {
         PokemonType.NORMAL -> PokemonTypeUiModel.NORMAL

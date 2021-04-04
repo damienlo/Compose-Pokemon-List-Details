@@ -4,8 +4,9 @@ import jet.pack.compose.masterdetails.data.model.PokemonNamedApiResourceResponse
 import jet.pack.compose.masterdetails.domain.model.mapper.PokemonIdExtractorUtils.extractId
 import jet.pack.compose.masterdetails.domain.model.PokemonPreview
 import java.util.*
+import javax.inject.Inject
 
-class PokemonPreviewMapper {
+class PokemonPreviewMapper @Inject constructor() {
 
     fun map(pokemon: PokemonNamedApiResourceResponse): PokemonPreview =
         PokemonPreview(

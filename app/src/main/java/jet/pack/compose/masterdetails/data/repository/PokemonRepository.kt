@@ -5,8 +5,11 @@ import jet.pack.compose.masterdetails.data.model.PokemonMoveResponse
 import jet.pack.compose.masterdetails.data.model.PokemonNamedApiResourceResponse
 import jet.pack.compose.masterdetails.data.model.PokemonSpeciesResponse
 import jet.pack.compose.masterdetails.data.remote.PokemonService
+import javax.inject.Inject
 
-class PokemonRepository(private val service: PokemonService) {
+class PokemonRepository @Inject constructor(
+    private val service: PokemonService
+) {
 
     suspend fun getPokemons(): List<PokemonNamedApiResourceResponse> {
         val response = service.getPokemons(limit = 151, offset = 0)

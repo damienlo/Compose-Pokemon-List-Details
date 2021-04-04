@@ -3,8 +3,9 @@ package jet.pack.compose.masterdetails.ui.model.mapper
 import jet.pack.compose.masterdetails.domain.model.PokemonPreview
 import jet.pack.compose.masterdetails.ui.model.PokemonPreviewUiModel
 import java.util.*
+import javax.inject.Inject
 
-class PokemonPreviewUiMapper {
+class PokemonPreviewUiMapper @Inject constructor() {
 
     fun map(pokemonPreview: PokemonPreview): PokemonPreviewUiModel =
         PokemonPreviewUiModel(

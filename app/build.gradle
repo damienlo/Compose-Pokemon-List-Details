@@ -4,6 +4,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -87,5 +88,11 @@ dependencies {
     implementation Libs.Moshi.moshi
     implementation Libs.Moshi.Converter.moshiConverter
     kapt Libs.Moshi.moshiCodeGen
+
+    // Dagger
+    implementation Libs.Dagger.hiltAndroid
+    implementation Libs.Dagger.AndroidX.hiltViewModel
+    implementation Libs.Dagger.Navigation.hiltNavigation
+    kapt Libs.Dagger.hiltAndroidCompiler
 
 }
