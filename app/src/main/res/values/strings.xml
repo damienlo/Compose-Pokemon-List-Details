@@ -1,3 +1,52 @@
 <resources>
-    <string name="app_name">MasterDetails</string>
+    <string name="app_name">Pokemon</string>
+
+    <!-- Generic Loading -->
+    <string name="pokemon_generic_loading">Loading …</string>
+
+    <!-- Generic Error -->
+    <string name="pokemon_generic_error_title">Something went wrong</string>
+    <string name="pokemon_generic_error_subtitle">Please try again</string>
+    <string name="pokemon_generic_error_button_retry">RETRY</string>
+
+    <!-- Pokemon Details -->
+    <string name="pokemon_details_height">%1$s m</string>
+    <string name="pokemon_details_weight">%1$s kg</string>
+
+    <!-- Pokemon Types -->
+    <string name="pokemon_type_normal">NORMAL</string>
+    <string name="pokemon_type_fire">FIRE</string>
+    <string name="pokemon_type_water">WATER</string>
+    <string name="pokemon_type_electric">ELECTRIC</string>
+    <string name="pokemon_type_grass">GRASS</string>
+    <string name="pokemon_type_ice">ICE</string>
+    <string name="pokemon_type_fighting">FIGHTING</string>
+    <string name="pokemon_type_poison">POISON</string>
+    <string name="pokemon_type_ground">GROUND</string>
+    <string name="pokemon_type_flying">FLYING</string>
+    <string name="pokemon_type_psychic">PSYCHIC</string>
+    <string name="pokemon_type_bug">BUG</string>
+    <string name="pokemon_type_rock">ROCK</string>
+    <string name="pokemon_type_ghost">GHOST</string>
+    <string name="pokemon_type_dragon">DRAGON</string>
+    <string name="pokemon_type_dark">DARK</string>
+    <string name="pokemon_type_steel">STEEL</string>
+    <string name="pokemon_type_fairy">FAIRY</string>
+    <string name="pokemon_type_unknown">UNKNOWN</string>
+
+    <!-- Pokemon Stats -->
+    <string name="pokemon_details_stats_title">Stats</string>
+    <string name="pokemon_stat_hp">HP</string>
+    <string name="pokemon_stat_atk">ATK</string>
+    <string name="pokemon_stat_def">DEF</string>
+    <string name="pokemon_stat_satk">SATK</string>
+    <string name="pokemon_stat_sdef">SDEF</string>
+    <string name="pokemon_stat_spd">SPD</string>
+
+    <!-- Pokemon Moves -->
+    <string name="pokemon_details_moves_title">Moves</string>
+
+    <!-- Err -->
+    <string name="pokemon_generic_err">ERR</string>
+
 </resources>
