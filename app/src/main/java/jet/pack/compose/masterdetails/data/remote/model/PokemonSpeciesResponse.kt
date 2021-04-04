@@ -1,4 +1,4 @@
-package jet.pack.compose.masterdetails.data.model
+package jet.pack.compose.masterdetails.data.remote.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

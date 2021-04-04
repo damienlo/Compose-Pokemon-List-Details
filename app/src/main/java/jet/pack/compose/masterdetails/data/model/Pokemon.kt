@@ -1,4 +1,4 @@
-package jet.pack.compose.masterdetails.domain.model
+package jet.pack.compose.masterdetails.data.model
 
 data class Pokemon(
     val id: String,

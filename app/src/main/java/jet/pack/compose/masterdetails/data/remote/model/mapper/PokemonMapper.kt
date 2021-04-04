@@ -1,14 +1,14 @@
-package jet.pack.compose.masterdetails.domain.model.mapper
+package jet.pack.compose.masterdetails.data.remote.model.mapper
 
-import jet.pack.compose.masterdetails.data.model.PokemonDetailsResponse
-import jet.pack.compose.masterdetails.data.model.PokemonDetailsStatResponse
-import jet.pack.compose.masterdetails.data.model.PokemonFlavorText
-import jet.pack.compose.masterdetails.data.model.PokemonMoveResponse
-import jet.pack.compose.masterdetails.data.model.PokemonSpeciesResponse
-import jet.pack.compose.masterdetails.domain.model.Move
-import jet.pack.compose.masterdetails.domain.model.Pokemon
-import jet.pack.compose.masterdetails.domain.model.PokemonType
-import jet.pack.compose.masterdetails.domain.model.Stat
+import jet.pack.compose.masterdetails.data.remote.model.PokemonDetailsResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonDetailsStatResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonFlavorText
+import jet.pack.compose.masterdetails.data.remote.model.PokemonMoveResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonSpeciesResponse
+import jet.pack.compose.masterdetails.data.model.Move
+import jet.pack.compose.masterdetails.data.model.Pokemon
+import jet.pack.compose.masterdetails.data.model.PokemonType
+import jet.pack.compose.masterdetails.data.model.Stat
 import javax.inject.Inject
 
 class PokemonMapper @Inject constructor() {

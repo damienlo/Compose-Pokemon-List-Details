@@ -12,7 +12,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jet.pack.compose.masterdetails.ui.theme.MasterDetailsTheme
-import java.util.*
+import java.util.Locale
 
 @Composable
 fun PokemonButton(

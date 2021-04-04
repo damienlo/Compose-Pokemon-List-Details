@@ -1,4 +1,4 @@
-package jet.pack.compose.masterdetails.domain.model
+package jet.pack.compose.masterdetails.data.model
 
 enum class PokemonType(val strValue: String) {
     NORMAL("normal"),

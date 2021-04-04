@@ -1,9 +1,9 @@
 package jet.pack.compose.masterdetails.data.remote
 
-import jet.pack.compose.masterdetails.data.model.PokemonDetailsResponse
-import jet.pack.compose.masterdetails.data.model.PokemonMoveResponse
-import jet.pack.compose.masterdetails.data.model.PokemonPaginatedResponse
-import jet.pack.compose.masterdetails.data.model.PokemonSpeciesResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonDetailsResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonMoveResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonPaginatedResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonSpeciesResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

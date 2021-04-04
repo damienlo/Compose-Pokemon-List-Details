@@ -1,30 +1,52 @@
 package jet.pack.compose.masterdetails.data.repository
 
-import jet.pack.compose.masterdetails.data.model.PokemonDetailsResponse
-import jet.pack.compose.masterdetails.data.model.PokemonMoveResponse
-import jet.pack.compose.masterdetails.data.model.PokemonNamedApiResourceResponse
-import jet.pack.compose.masterdetails.data.model.PokemonSpeciesResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonDetailsResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonMoveResponse
+import jet.pack.compose.masterdetails.data.remote.model.PokemonSpeciesResponse
+import jet.pack.compose.masterdetails.data.remote.model.mapper.PokemonIdExtractorUtils.extractId
+import jet.pack.compose.masterdetails.data.remote.model.mapper.PokemonMapper
+import jet.pack.compose.masterdetails.data.remote.model.mapper.PokemonPreviewMapper
 import jet.pack.compose.masterdetails.data.remote.PokemonService
+import jet.pack.compose.masterdetails.data.IPokemonRepository
+import jet.pack.compose.masterdetails.data.model.Pokemon
+import jet.pack.compose.masterdetails.data.model.PokemonPreview
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
-    private val service: PokemonService
-) {
+    private val service: PokemonService,
+    private val previewMapper: PokemonPreviewMapper,
+    private val pokemonMapper: PokemonMapper
+) : IPokemonRepository {
 
-    suspend fun getPokemons(): List<PokemonNamedApiResourceResponse> {
-        val response = service.getPokemons(limit = 151, offset = 0)
-        return response.results
+    override suspend fun getPokemons(): List<PokemonPreview> {
+        val pokemons = service.getPokemons(limit = 151, offset = 0).results
+        return pokemons.map { previewMapper.map(it) }
     }
 
-    suspend fun getPokemon(id: String): PokemonDetailsResponse {
-        return service.getPokemon(id = id)
+    override suspend fun getPokemon(pokemonId: String): Pokemon {
+        val pokemon = service.getPokemon(id = pokemonId)
+        val species = getSpecies(pokemon)
+        val moves = getStarterMoves(pokemon)
+        return pokemonMapper.map(pokemon, species, moves)
     }
 
-    suspend fun getSpecies(id: String): PokemonSpeciesResponse {
-        return service.getPokemonSpecies(id = id)
+    private suspend fun getSpecies(pokemon: PokemonDetailsResponse): PokemonSpeciesResponse {
+        val speciesId = pokemon.species.url.extractId()
+        return service.getPokemonSpecies(speciesId)
     }
 
-    suspend fun getMove(id: String): PokemonMoveResponse {
-        return service.getPokemonMove(id = id)
-    }
+    private suspend fun getStarterMoves(pokemon: PokemonDetailsResponse): List<PokemonMoveResponse> =
+        withContext(Dispatchers.IO) {
+            val startedMoveIds = pokemon.moves
+                .filter { it.versionGroupDetails.first().learnedAt == 1 }
+                .map { it.move.url.extractId() }
+            val moveRequests = startedMoveIds.map { moveId ->
+                async { service.getPokemonMove(moveId) }
+            }
+            moveRequests.awaitAll()
+        }
 }

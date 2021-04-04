@@ -1,8 +1,8 @@
 package jet.pack.compose.masterdetails.ui.model.mapper
 
-import jet.pack.compose.masterdetails.domain.model.Move
+import jet.pack.compose.masterdetails.data.model.Move
 import jet.pack.compose.masterdetails.ui.model.PokemonMoveUiModel
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 class PokemonMoveUiMapper @Inject constructor(

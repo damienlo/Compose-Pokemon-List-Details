@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jet.pack.compose.masterdetails.domain.GetPokemonPreviewsInteractor
+import jet.pack.compose.masterdetails.data.IPokemonRepository
 import jet.pack.compose.masterdetails.ui.model.PokemonPreviewUiModel
 import jet.pack.compose.masterdetails.ui.model.mapper.PokemonPreviewUiMapper
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ sealed class ListState {
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val getPokemonPreviews: GetPokemonPreviewsInteractor,
+    private val repository: IPokemonRepository,
     private val uiMapper: PokemonPreviewUiMapper
 ) : ViewModel() {
 
@@ -38,7 +38,7 @@ class ListViewModel @Inject constructor(
         _state.value = ListState.Loading
         viewModelScope.launch {
             try {
-                val pokemons = getPokemonPreviews()
+                val pokemons = repository.getPokemons()
                 val pokemonUiItems = pokemons.map { uiMapper.map(it) }
                 _state.value = ListState.Success(pokemons = pokemonUiItems)
             } catch (e: Exception) {

@@ -1,9 +1,9 @@
-package jet.pack.compose.masterdetails.domain.model.mapper
+package jet.pack.compose.masterdetails.data.remote.model.mapper
 
-import jet.pack.compose.masterdetails.data.model.PokemonNamedApiResourceResponse
-import jet.pack.compose.masterdetails.domain.model.mapper.PokemonIdExtractorUtils.extractId
-import jet.pack.compose.masterdetails.domain.model.PokemonPreview
-import java.util.*
+import jet.pack.compose.masterdetails.data.remote.model.PokemonNamedApiResourceResponse
+import jet.pack.compose.masterdetails.data.remote.model.mapper.PokemonIdExtractorUtils.extractId
+import jet.pack.compose.masterdetails.data.model.PokemonPreview
+import java.util.Locale
 import javax.inject.Inject
 
 class PokemonPreviewMapper @Inject constructor() {

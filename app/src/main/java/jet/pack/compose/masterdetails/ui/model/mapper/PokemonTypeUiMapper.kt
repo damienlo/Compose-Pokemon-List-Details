@@ -1,6 +1,6 @@
 package jet.pack.compose.masterdetails.ui.model.mapper
 
-import jet.pack.compose.masterdetails.domain.model.PokemonType
+import jet.pack.compose.masterdetails.data.model.PokemonType
 import jet.pack.compose.masterdetails.ui.model.PokemonTypeUiModel
 import javax.inject.Inject
 

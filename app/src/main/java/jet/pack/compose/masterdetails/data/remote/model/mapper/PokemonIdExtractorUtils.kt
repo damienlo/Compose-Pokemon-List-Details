@@ -1,4 +1,4 @@
-package jet.pack.compose.masterdetails.domain.model.mapper
+package jet.pack.compose.masterdetails.data.remote.model.mapper
 
 internal object PokemonIdExtractorUtils {
 

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jet.pack.compose.masterdetails.domain.GetPokemonDetailsInteractor
+import jet.pack.compose.masterdetails.data.IPokemonRepository
 import jet.pack.compose.masterdetails.ui.model.PokemonDetailsUiModel
 import jet.pack.compose.masterdetails.ui.model.mapper.PokemonDetailsUiMapper
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ sealed class DetailsState {
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val getPokemonDetails: GetPokemonDetailsInteractor,
+    private val repository: IPokemonRepository,
     private val uiMapper: PokemonDetailsUiMapper
 ) : ViewModel() {
 
@@ -43,7 +43,7 @@ class DetailsViewModel @Inject constructor(
         _state.value = DetailsState.Loading
         viewModelScope.launch {
             try {
-                val pokemon = getPokemonDetails(pokemonId = pokemonId)
+                val pokemon = repository.getPokemon(pokemonId = pokemonId)
                 val pokemonUiItem = uiMapper.map(pokemon)
                 _state.value = DetailsState.Success(pokemon = pokemonUiItem)
             } catch (e: Exception) {
