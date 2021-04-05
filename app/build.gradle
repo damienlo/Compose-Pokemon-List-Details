@@ -95,4 +95,11 @@ dependencies {
     implementation Libs.Dagger.Navigation.hiltNavigation
     kapt Libs.Dagger.hiltAndroidCompiler
 
+    // Unit Test
+    testImplementation Libs.JUnit.junit
+    testImplementation Libs.Mockito.inline
+    testImplementation Libs.Mockito.kotlin
+    testImplementation Libs.Coroutines.test
+    testImplementation Libs.AndroidX.Test.Arch.core
+
 }

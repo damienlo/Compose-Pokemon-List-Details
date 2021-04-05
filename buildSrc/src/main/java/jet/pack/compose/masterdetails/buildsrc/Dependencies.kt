@@ -76,6 +76,7 @@ object Libs {
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
+            const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
         }
 
         object ComposeNavigation {
@@ -96,5 +97,39 @@ object Libs {
             const val constraintLayoutCompose =
                 "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha03"
         }
+
+        object Test {
+            private const val version = "1.3.0"
+            const val core = "androidx.test:core:$version"
+            const val rules = "androidx.test:rules:$version"
+
+            object Ext {
+                private const val version = "1.1.2"
+                const val junit = "androidx.test.ext:junit-ktx:$version"
+            }
+
+            object Espresso {
+                private const val version = "3.3.0"
+                const val espressoCore = "androidx.test.espresso:espresso-core:${version}"
+            }
+
+            object Arch {
+                private const val version = "2.1.0"
+                const val core = "androidx.arch.core:core-testing:${version}"
+            }
+        }
     }
+
+    object JUnit {
+        private const val version = "4.13"
+        const val junit = "junit:junit:$version"
+    }
+
+    object Mockito {
+        private const val kotlinVersion = "3.1.0"
+        private const val inlineVersion = "3.8.0"
+        const val kotlin = "org.mockito.kotlin:mockito-kotlin:${kotlinVersion}"
+        const val inline = "org.mockito:mockito-inline:${inlineVersion}"
+    }
+
 }

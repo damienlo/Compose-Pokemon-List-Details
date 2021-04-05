@@ -8,9 +8,10 @@ import jet.pack.compose.masterdetails.data.remote.model.mapper.PokemonMapper
 import jet.pack.compose.masterdetails.data.remote.model.mapper.PokemonPreviewMapper
 import jet.pack.compose.masterdetails.data.remote.PokemonService
 import jet.pack.compose.masterdetails.data.IPokemonRepository
+import jet.pack.compose.masterdetails.data.di.annotations.DispatcherIO
 import jet.pack.compose.masterdetails.data.model.Pokemon
 import jet.pack.compose.masterdetails.data.model.PokemonPreview
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class PokemonRepository @Inject constructor(
     private val service: PokemonService,
     private val previewMapper: PokemonPreviewMapper,
-    private val pokemonMapper: PokemonMapper
+    private val pokemonMapper: PokemonMapper,
+    @DispatcherIO private val dispatcherIo: CoroutineDispatcher
 ) : IPokemonRepository {
 
     override suspend fun getPokemons(): List<PokemonPreview> {
@@ -40,7 +42,7 @@ class PokemonRepository @Inject constructor(
     }
 
     private suspend fun getStarterMoves(pokemon: PokemonDetailsResponse): List<PokemonMoveResponse> =
-        withContext(Dispatchers.IO) {
+        withContext(dispatcherIo) {
             val startedMoveIds = pokemon.moves
                 .filter { it.versionGroupDetails.first().learnedAt == 1 }
                 .map { it.move.url.extractId() }
