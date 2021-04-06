@@ -9,6 +9,7 @@ List and details screen of Pokemon with compose
 ## :hammer: Built with
 - [Compose](https://developer.android.com/jetpack/compose)
 - [Compose-navigation](https://developer.android.com/jetpack/compose/navigation)
+- [Compose-testing](https://developer.android.com/jetpack/compose/testing)
 - [Accompanist](https://google.github.io/accompanist/)
 - [Dagger-hilt](https://dagger.dev/hilt/)
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
